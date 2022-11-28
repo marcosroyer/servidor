@@ -121,6 +121,21 @@ app.put("/addComment/:id", (req, res) => {
   return res.status(201).json(clone);
 });
 
+app.get("/setor/:nomeSetor", (req, res) => {
+  const { nomeSetor } = req.params;
+  const processos = bancoDados.filter((processo) => {
+    return processo.setor === nomeSetor;
+  });
+
+  return res.status(201).json(processos);
+});
+
+app.get("/random", (req, res) => {
+  const index = Math.floor(Math.random() * bancoDados.length);
+
+  return res.status(201).json(bancoDados[index]);
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Server up and running on http://localhost/${process.env.PORT}`);
 });
