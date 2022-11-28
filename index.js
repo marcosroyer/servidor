@@ -35,7 +35,7 @@ const bancoDados = [
     setor: "tre",
   },
   {
-    id: "ee5999d7-02e9-4b3d-a1ab-f067-f067eef54173",
+    id: "c974e448-489c-4936-8d29-08564c80b736",
     documentName: "Licitação Compras - Ar Condicionado",
     status: "Finalizado",
     details: "Processo de licitação para compra de ar-condicionado",
@@ -63,11 +63,11 @@ app.put("/edit/:id", (req, res) => {
   const processo = bancoDados.find((processo) => {
     return processo.id === id;
   });
-  processo.documentName = processo.documentName + " - versao 2";
+  const clone = { ...processo, ...req.body };
   const index = bancoDados.indexOf(processo);
-  bancoDados.splice(index, 1, processo);
-
-  return res.status(201).json(processo);
+  bancoDados.splice(index, 1, clone);
+  console.log(bancoDados);
+  return res.status(201).json(clone);
 });
 
 app.delete("/delete/:id", (req, res) => {
